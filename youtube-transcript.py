@@ -25,7 +25,7 @@ def summarize_with_groq(text: str):
     """Summarize transcript using Groq API."""
     try:
         response = client.chat.completions.create(
-            model="llama3-8b-8192",  # Choose a Groq-supported model
+            model=os.environ.get("GROQ_MODEL"),  # Choose a Groq-supported model
             messages=[{"role": "user", "content": f"Summarize the following text:\n\n{text}"}]
         )
         return response.choices[0].message.content if response.choices else "No response"
